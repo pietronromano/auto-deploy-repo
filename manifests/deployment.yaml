@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auto-workflow
+  labels:
+    app: auto-workflow
+    kubernetes.azure.com/generator: devhub
+  namespace: workflow-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auto-workflow
+  template:
+    metadata:
+      labels:
+        app: auto-workflow
+    spec:
+      containers:
+        - name: auto-workflow
+          image: pnraksauto.azurecr.io/image-workflow-1734686743498:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
